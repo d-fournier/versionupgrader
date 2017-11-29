@@ -1,0 +1,6 @@
+include ':versionupgrader-annotations'
+include ':versionupgrader-core'
+include ':versionupgrader-compiler'
+
+rootProject.name = 'versionupgrader-parent'
+
