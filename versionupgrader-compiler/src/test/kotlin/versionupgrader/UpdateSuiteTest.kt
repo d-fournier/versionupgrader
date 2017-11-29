@@ -33,46 +33,11 @@ class UpdateSuiteTest {
 
     @Test
     fun simple() {
-
-        val javaFileObject = JavaFileObjects.forSourceLines(
-                "foo.bar.A",
-                "package me.dfournier.versionupgrader;",
-                        "",
-                        "import me.dfournier.versionupgrader.annotations.UpdateSuite;",
-                        "import org.jetbrains.annotations.Nullable;",
-                        "",
-                        "@UpdateSuite",
-                        "public class A implements Updater {",
-                        "    @Override",
-                        "    public int getCurrentVersion() {",
-                        "        return 0;",
-                        "    }",
-                        "",
-                        "    @Nullable",
-                        "    @Override",
-                        "    public Integer getVersionUpgraderData() {",
-                        "        return null;",
-                        "    }",
-                        "",
-                        "    @Override",
-                        "    public void setVersionUpgraderData(int data) {",
-                        "",
-                        "    }",
-                        "}"
-        )
-        val expectedQualifiedName = "me.dfournier.versionupgrader.Upgrader_A"
-        val expectedOutput = JavaFileObjects.forSourceLines(
-                expectedQualifiedName,
-                ""
-        )
-
-
         val compilation = javac().withProcessors(VersionUpgraderProcessor())
-                .compile(javaFileObject)
+                .compile(JavaFileObjects.forResource("EmptyTestSuite/A.java"))
         assertThat(compilation)
-                .generatedSourceFile(expectedQualifiedName)
-                .hasSourceEquivalentTo(expectedOutput)
-
+                .generatedSourceFile("me.dfournier.versionupgrader.Upgrader_A")
+                .hasSourceEquivalentTo(JavaFileObjects.forResource("EmptyTestSuite/Upgrader_A.java"))
     }
 
 }

@@ -88,7 +88,7 @@ class VersionUpgraderProcessor : AbstractProcessor() {
                     }
                     .forEach {
                         val version = it.getAnnotation(Update::class.java).version
-                        codeBlock.beginControlFlow("if (currentVersion >= \$L && previousVersion < \$L)")
+                        codeBlock.beginControlFlow("if (currentVersion >= \$L && previousVersion < \$L)", version, version)
                                 .addStatement("\$L()", it.simpleName)
                                 .endControlFlow()
                     }
@@ -96,11 +96,10 @@ class VersionUpgraderProcessor : AbstractProcessor() {
 
 
         }
-        var methodSpec = MethodSpec.methodBuilder("execute")
+        val methodSpec = MethodSpec.methodBuilder("execute")
                 .addModifiers(Modifier.PUBLIC)
-                .addJavadoc("Execute the update script.")
+                .addJavadoc("Execute the update script.\n")
                 .addCode(codeBlock.build())
-
 
 
         val typeSpec = TypeSpec.classBuilder(className.simpleName())

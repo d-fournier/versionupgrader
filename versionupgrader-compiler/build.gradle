@@ -11,6 +11,8 @@ dependencies {
     testImplementation deps.test.junit
     testImplementation deps.test.truth
     testImplementation deps.test.compiletesting
+    //testImplementation "com.google.guava:guava:23.5-android"
+    testCompile files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 }
 
 compileKotlin {

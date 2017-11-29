@@ -1,7 +1,8 @@
 package me.dfournier.versionupgrader;
 
-import me.dfournier.versionupgrader.annotations.UpdateSuite;
 import org.jetbrains.annotations.Nullable;
+
+import me.dfournier.versionupgrader.annotations.UpdateSuite;
 
 @UpdateSuite
 public class A implements Updater {
@@ -18,6 +19,5 @@ public class A implements Updater {
 
     @Override
     public void setVersionUpgraderData(int data) {
-
     }
 }
